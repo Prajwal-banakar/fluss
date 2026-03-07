@@ -113,6 +113,7 @@ import org.apache.fluss.shaded.arrow.org.apache.arrow.vector.util.DataSizeRoundi
 import org.apache.fluss.types.ArrayType;
 import org.apache.fluss.types.BigIntType;
 import org.apache.fluss.types.BinaryType;
+import org.apache.fluss.types.BitmapType;
 import org.apache.fluss.types.BooleanType;
 import org.apache.fluss.types.BytesType;
 import org.apache.fluss.types.CharType;
@@ -590,6 +591,12 @@ public class ArrowUtils {
         @Override
         public ArrowType visit(RowType rowType) {
             return ArrowType.Struct.INSTANCE;
+        }
+
+        @Override
+        public ArrowType visit(BitmapType bitmapType) {
+            // BITMAP has no Arrow equivalent — transport as LargeBinary
+            return ArrowType.LargeBinary.INSTANCE;
         }
 
         @Override

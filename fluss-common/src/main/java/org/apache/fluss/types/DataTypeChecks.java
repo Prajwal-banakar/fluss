@@ -76,6 +76,11 @@ public final class DataTypeChecks {
                             "Invalid use of extractor %s. Called on data type: %s",
                             this.getClass().getSimpleName(), dataType));
         }
+
+        @Override
+        public T visit(BitmapType bitmapType) {
+            throw new UnsupportedOperationException("BITMAP type does not support this operation.");
+        }
     }
 
     private static class LengthExtractor extends Extractor<Integer> {
@@ -192,6 +197,11 @@ public final class DataTypeChecks {
         @Override
         protected Boolean defaultMethod(DataType that) {
             return original.equals(that);
+        }
+
+        @Override
+        public Boolean visit(BitmapType bitmapType) {
+            return original instanceof BitmapType;
         }
     }
 }

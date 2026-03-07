@@ -71,4 +71,9 @@ public class ReassignFieldId extends DataTypeDefaultVisitor<DataType> {
     protected DataType defaultMethod(DataType dataType) {
         return dataType;
     }
+
+    @Override
+    public DataType visit(BitmapType bitmapType) {
+        return bitmapType.copy(bitmapType.isNullable());
+    }
 }

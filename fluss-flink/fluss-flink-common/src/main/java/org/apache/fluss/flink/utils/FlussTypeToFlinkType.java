@@ -20,6 +20,7 @@ package org.apache.fluss.flink.utils;
 import org.apache.fluss.types.ArrayType;
 import org.apache.fluss.types.BigIntType;
 import org.apache.fluss.types.BinaryType;
+import org.apache.fluss.types.BitmapType;
 import org.apache.fluss.types.BooleanType;
 import org.apache.fluss.types.BytesType;
 import org.apache.fluss.types.CharType;
@@ -133,6 +134,11 @@ class FlussTypeToFlinkType implements DataTypeVisitor<DataType> {
         return withNullability(
                 DataTypes.TIMESTAMP_WITH_LOCAL_TIME_ZONE(localZonedTimestampType.getPrecision()),
                 localZonedTimestampType.isNullable());
+    }
+
+    @Override
+    public DataType visit(BitmapType bitmapType) {
+        return withNullability(DataTypes.BYTES(), bitmapType.isNullable());
     }
 
     @Override

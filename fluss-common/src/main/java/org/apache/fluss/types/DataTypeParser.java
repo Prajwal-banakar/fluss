@@ -281,6 +281,7 @@ public final class DataTypeParser {
         ROW,
         NOT,
         NULL,
+        BITMAP,
     }
 
     private enum UnsupportedKeyword {
@@ -291,7 +292,6 @@ public final class DataTypeParser {
         RAW,
         LEGACY,
         VARIANT,
-        BITMAP
     }
 
     private static final Set<String> KEYWORDS =
@@ -514,6 +514,8 @@ public final class DataTypeParser {
                     return parseMapType();
                 case ROW:
                     return parseRowType();
+                case BITMAP:
+                    return new BitmapType();
                 default:
                     throw parsingError("Unsupported type: " + token().value);
             }

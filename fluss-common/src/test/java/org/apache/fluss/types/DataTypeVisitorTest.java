@@ -46,7 +46,8 @@ public class DataTypeVisitorTest {
                     DataTypes.BYTES(),
                     DataTypes.ARRAY(DataTypes.INT()),
                     DataTypes.MAP(DataTypes.INT(), DataTypes.INT()),
-                    DataTypes.ROW(DataTypes.FIELD("a", DataTypes.INT()))
+                    DataTypes.ROW(DataTypes.FIELD("a", DataTypes.INT())),
+                    DataTypes.BITMAP()
                 };
 
         String[] typeStrings = {
@@ -68,7 +69,8 @@ public class DataTypeVisitorTest {
             "BYTES",
             "ARRAY<INT>",
             "MAP<INT NOT NULL, INT>",
-            "ROW<`a` INT>"
+            "ROW<`a` INT>",
+            "BITMAP"
         };
 
         for (int i = 0; i < allTypes.length; i++) {
@@ -83,6 +85,11 @@ public class DataTypeVisitorTest {
         @Override
         protected String defaultMethod(DataType dataType) {
             return dataType.toString();
+        }
+
+        @Override
+        public String visit(BitmapType bitmapType) {
+            return "BITMAP";
         }
     }
 }

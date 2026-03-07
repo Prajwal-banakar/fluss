@@ -120,7 +120,7 @@ public enum AggFunctionType {
                 return new DataTypeRoot[] {DataTypeRoot.BOOLEAN};
             case RBM32:
             case RBM64:
-                return new DataTypeRoot[] {DataTypeRoot.BYTES};
+                return new DataTypeRoot[] {DataTypeRoot.BYTES, DataTypeRoot.BITMAP};
             case LISTAGG:
             case STRING_AGG:
                 return new DataTypeRoot[] {DataTypeRoot.STRING, DataTypeRoot.CHAR};

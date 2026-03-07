@@ -337,6 +337,9 @@ public class CompactedRowReader {
                         ((RowType) fieldType).getFieldTypes().toArray(new DataType[0]);
                 fieldReader = (reader, pos) -> reader.readRow(nestedFieldTypes);
                 break;
+            case BITMAP:
+                fieldReader = (reader, pos) -> reader.readBytes();
+                break;
             default:
                 throw new IllegalArgumentException(
                         "Unsupported type for CompatedRow: " + fieldType);

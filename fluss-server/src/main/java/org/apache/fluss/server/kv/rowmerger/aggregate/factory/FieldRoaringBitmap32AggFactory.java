@@ -36,8 +36,9 @@ public class FieldRoaringBitmap32AggFactory implements FieldAggregatorFactory {
     @Override
     public FieldRoaringBitmap32Agg create(DataType fieldType, AggFunction aggFunction) {
         checkArgument(
-                fieldType.getTypeRoot() == DataTypeRoot.BYTES,
-                "Data type for rbm32 column must be 'BytesType' but was '%s'.",
+                fieldType.getTypeRoot() == DataTypeRoot.BYTES
+                        || fieldType.getTypeRoot() == DataTypeRoot.BITMAP,
+                "Data type for rbm32 column must be BYTES or BITMAP but was '%s'.",
                 fieldType);
         return new FieldRoaringBitmap32Agg(fieldType);
     }

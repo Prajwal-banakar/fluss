@@ -63,6 +63,15 @@ public class DataTypes {
     }
 
     /**
+     * Data type of a RoaringBitmap stored as a compressed binary payload.
+     *
+     * @see BitmapType
+     */
+    public static BitmapType BITMAP() {
+        return new BitmapType();
+    }
+
+    /**
      * Data type of a boolean with a (possibly) three-valued logic of {@code TRUE, FALSE, UNKNOWN}.
      *
      * @see BooleanType
