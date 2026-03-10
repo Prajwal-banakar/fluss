@@ -20,6 +20,7 @@ package org.apache.fluss.lake.paimon.utils;
 import org.apache.fluss.types.ArrayType;
 import org.apache.fluss.types.BigIntType;
 import org.apache.fluss.types.BinaryType;
+import org.apache.fluss.types.BitmapType;
 import org.apache.fluss.types.BooleanType;
 import org.apache.fluss.types.BytesType;
 import org.apache.fluss.types.CharType;
@@ -71,6 +72,12 @@ public class FlussDataTypeToPaimonDataType implements DataTypeVisitor<DataType> 
     @Override
     public DataType visit(BytesType bytesType) {
         return withNullability(DataTypes.BYTES(), bytesType.isNullable());
+    }
+
+    @Override
+    public DataType visit(BitmapType bitmapType) {
+        // BITMAP has no direct Paimon equivalent; serialized as raw bytes
+        return withNullability(DataTypes.BYTES(), bitmapType.isNullable());
     }
 
     @Override

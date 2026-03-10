@@ -45,6 +45,11 @@ object FlussToSparkTypeVisitor extends DataTypeVisitor[SparkDataType] {
     SparkDataTypes.BinaryType
   }
 
+  override def visit(bitmapType: BitmapType): SparkDataType = {
+    // BITMAP has no direct Spark equivalent; serialized as BINARY
+    SparkDataTypes.BinaryType
+  }
+
   override def visit(decimalType: DecimalType): SparkDataType = {
     org.apache.spark.sql.types.DecimalType(decimalType.getPrecision, decimalType.getScale)
   }
